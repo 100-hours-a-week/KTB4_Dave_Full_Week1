@@ -1,0 +1,149 @@
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class Controller {
+    private final JVM jvm;
+    private final Scanner sc;
+
+    public Controller(JVM jvm, Scanner sc) {
+        this.jvm = jvm;
+        this.sc = sc;
+    }
+
+    public int numberInput(int start, int end){
+        int num = end;
+
+        while(num < start || num >= end){
+            try {
+                num = sc.nextInt();
+                if(num < start || num >= end){
+                    System.out.println(start+ "에서 " + (end-1) + " 사이의 정수를 입력해주세요.");
+                }
+            }
+            catch(Exception e){
+                if(e instanceof InputMismatchException){
+                    System.out.println(start+ "에서 " + (end-1) + " 사이의 정수를 입력해주세요.");
+                    sc.next();
+                }
+            }
+        }
+
+        return num;
+    }
+
+    public int numberInput(int start){
+        int num = 0;
+        while(num < start){
+            try {
+                num = sc.nextInt();
+                if(num < start){
+                    System.out.println((start-1)+ "보다 큰 정수를 입력해주세요.");
+                }
+            }
+            catch(Exception e){
+                if(e instanceof InputMismatchException){
+                    System.out.println((start-1)+ "보다 큰 정수를 입력해주세요.");
+                    sc.next();
+                }
+            }
+        }
+
+        return num;
+    }
+
+    public void run(){
+        int n = 0;
+
+        while(n != 5) {
+            System.out.println("어떤 작업을 할지 선택해주세요.");
+            System.out.println("1. 새 데이터 저장하기");
+            System.out.println("2. 시간 지나가게 하기");
+            System.out.println("3. 강제로 GC 실행하기");
+            System.out.println("4. 데이터 초기화하기");
+            System.out.println("5. 프로그램 종료하기");
+
+            n = numberInput(1, 6);
+            switch (n){
+                case 1:
+                    insertData();
+                    n = 0;
+                    break;
+                case 2:
+                    timePass();
+                    n = 0;
+                    break;
+                case 3:
+                    gcForce();
+                    n = 0;
+                    break;
+                case 4:
+                    dataInit();
+                    n = 0;
+                    break;
+                case 5:
+                    System.out.println("프로그램을 종료합니다.");
+            }
+        }
+
+    }
+
+    public void timePass(){
+        System.out.println("얼마나 시간을 지나가게 할지 입력해주세요");
+        int time = 0;
+
+        time = numberInput(1);
+        jvm.nextTime(time);
+        jvm.showData();
+    }
+
+    public void insertData(){
+        System.out.println("저장할 데이터 형식을 고르세요.");
+        System.out.println("1. 힙영역에 저장될 지역변수 데이터");
+        System.out.println("2. 메타영역에 저장될 클래스 메타 데이터");
+        int n = numberInput(1, 3);
+
+        System.out.println("저장할 데이터의 이름을 입력하세요.");
+        String name = sc.next();
+
+        System.out.println("저장할 데이터의 크기를 정해주세요.");
+        int size = numberInput(1);
+
+        System.out.println("저장할 데이터의 유효기간을 정해주세요.");
+        int exp = numberInput(1);
+
+        try {
+            if (n == 1) {
+                jvm.insertHeapData(new Data(name, exp, size));
+            } else {
+                jvm.insertMetaData(new Data(name, exp, size));
+            }
+        }
+        catch(Throwable t){
+            if(t instanceof OutOfMemoryError){
+                jvm.handleError();
+            }
+        }
+        jvm.showData();
+    }
+
+    public void dataInit(){
+        System.out.println("힙 영역 데이터와 메타 스페이스를 정리하겠습니다.");
+        System.out.println();
+        jvm.initData();
+        jvm.showData();
+    }
+
+    public void gcForce(){
+        System.out.println("Full GC를 실행합니다.");
+        System.out.println();
+        try {
+            jvm.garbageCollect();
+        }
+        catch(Throwable t){
+            if(t instanceof OutOfMemoryError){
+                jvm.handleError();
+            }
+        }
+        jvm.showData();
+    }
+}

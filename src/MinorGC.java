@@ -5,9 +5,6 @@ public class MinorGC extends GC{
     private int youngTop; // young에서 다음으로 복사할 주소
     private int oldTop; // old에서 다음으로 복사할 주소
 
-    // 현재 어느 부분에 객체를 삽입할 수 있는지 저장해야 하는데 이걸 young과 old에 대해서 저장해야 하는데 각 GC에서 가지고 있어야 하나?
-    // JVM에서 관리하는 게 맞기는 한데 이런 단순화 구현에서는 GC가 하는게 맞나 싶기도 한데
-    // JVM
 
     public MinorGC( Data[] heap, int start, int end, int top, int edenBound, int surv1Bound) {
         super(heap, start, end, top);
@@ -19,17 +16,27 @@ public class MinorGC extends GC{
     }
 
     @Override
+    public int[] execute(){
+        // result[0] 에는 oldTop, [1]에는 정리한 메모리 수를 전송한다.
+        System.out.println("Minor GC 발생");
+        int[] result = new int[2];
+        this.search();
+        result[1] = this.cleaning();
+        result[0] = oldTop;
+        return result;
+    }
+
+    @Override
     protected void search() {
-        // 여기서 옮기다가 공간 부족하면 어떻게 처리할지 정해야 함
-        // 1. Young Generation이 부족한 경우
-        // 2. Old Generation이 부족한 경우
-        // 에러를 던져서 JVM에서 분기 처리 시키기가 가장 유력할 듯
-        // 결국 young에 크기가 커서 넣지 못해도 다음 객체는 넣을 수 있으니
+        // 공간 부족 시 에러를 던져서 JVM에서 에러 처리 시키기
         for(int i = start; i < top; i++){
             if(heap[i] != null){
                 if(heap[i].isLive()){
                     Data d = heap[i];
-                    copy(d);
+                    if(!copy(d)){
+                        throw new OutOfMemoryError();
+                    }
+                    i += d.getSize()-1;
                 }
             }
         }
@@ -40,7 +47,6 @@ public class MinorGC extends GC{
                 if(heap[i].isLive()){
                     Data d = heap[i];
                     if(!copy(d)){
-                        System.out.println("OOME 발생");
                         throw new OutOfMemoryError();
                     }
                 }
@@ -50,14 +56,7 @@ public class MinorGC extends GC{
             }
         }
 
-        if(nextSurv){
-            nextSurv = false;
-            youngTop = edenBound;
-        }
-        else{
-            nextSurv = true;
-            youngTop = surv1Bound;
-        }
+
     }
 
     private int checkSize(Data d){
@@ -76,7 +75,7 @@ public class MinorGC extends GC{
         }
 
         if(now == oldTop){
-            if(now + size >= heap.length) {
+            if(now + size > heap.length) {
                 return -1;
             }
         }
@@ -95,7 +94,6 @@ public class MinorGC extends GC{
 
         for(int i = 0; i < size; i++){
             heap[now+i] = d;
-            now++;
         }
         d.surviveGC();
 
@@ -118,6 +116,18 @@ public class MinorGC extends GC{
         }
 
         top = start;
+        if(nextSurv){
+            nextSurv = false;
+            youngTop = edenBound;
+        }
+        else{
+            nextSurv = true;
+            youngTop = surv1Bound;
+        }
         return 1;
+    }
+
+    public void setOldTop(int top){
+        this.oldTop = top;
     }
 }

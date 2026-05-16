@@ -12,6 +12,7 @@ public class FullGC extends MajorGC{
         this.metaTop = metaTop;
     }
 
+
     public void setMetaTop(int top){
         this.metaTop = top;
     }
@@ -34,8 +35,7 @@ public class FullGC extends MajorGC{
 
     @Override
     protected int cleaning(){
-        // Full GC의 경우 반환하는 값이 작으면 OOME와 같은 예외를 던지게 하는 것도 고려해봐야 함.
-        // 아니면 호출하는 쪽에서 0이면 에러 던지게 하는 게 나을 듯
+        // 정리한 데이터 크기를 반환한다.
         int result = 0;
 
         result += super.cleaning();
@@ -52,16 +52,14 @@ public class FullGC extends MajorGC{
             }
         }
 
-
+        compacting();
         return result;
     }
 
     @Override
     protected void compacting(){
-        // 아니면 Young과 Old 나눠서 할지 정해야 함
-
         compacting(heap, start, youngBound);
-
+        top = compacting(heap, youngBound, end);
         metaTop = compacting(meta, 0, metaTop);
     }
 }
