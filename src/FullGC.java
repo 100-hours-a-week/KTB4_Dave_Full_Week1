@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class FullGC extends MajorGC{
     private Data[] meta;
     private boolean[] metaMarking;
@@ -10,6 +12,12 @@ public class FullGC extends MajorGC{
         metaMarking = new boolean[meta.length];
         this.youngBound = youngBound;
         this.metaTop = metaTop;
+    }
+
+    @Override
+    public int[] execute(){
+        Arrays.fill(metaMarking, false);
+        return super.execute();
     }
 
 
@@ -52,7 +60,6 @@ public class FullGC extends MajorGC{
             }
         }
 
-        compacting();
         return result;
     }
 

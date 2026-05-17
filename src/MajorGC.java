@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class MajorGC extends GC{
     protected boolean[] marking;
     public MajorGC(Data[] heap, int start, int end, int top) {
@@ -8,6 +10,7 @@ public class MajorGC extends GC{
     @Override
     public int[] execute(){
         System.out.println(this.getClass().getName()+" 발생");
+        Arrays.fill(marking, false);
         int[] result = new int[2];
         this.search();
         result[1] = this.cleaning();
@@ -78,4 +81,5 @@ public class MajorGC extends GC{
         }
         return compTop;
     }
+
 }
