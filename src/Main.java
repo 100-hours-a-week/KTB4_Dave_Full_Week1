@@ -8,10 +8,15 @@ public class Main {
         // Eden과 Survivor의 크기 비는 8:1:1이 평균이지만 그럴 경우 테스트에 진행이 느려질 수 있어 적당히 작은 크기 채택
         Data[] heap = new Data[15];
         Data[] meta = new Data[5];
-        final MinorGC minorGC = new MinorGC(heap, 0, 5, 0, 3, 4);
-        final MajorGC majorGC = new MajorGC(heap,5, 15, 5);
-        final FullGC fullGC = new FullGC(heap, 0, 15, 5, meta, 5, 0);
-        final JVM jvm = new JVM(heap, meta, minorGC, majorGC, fullGC, 3, 5);
+        final int eden = 3;
+        final int young = 5;
+        final int surv1Bound = 4;
+        final int old = 15;
+
+        final MinorGC minorGC = new MinorGC(heap, 0, young, 0, eden, surv1Bound);
+        final MajorGC majorGC = new MajorGC(heap,young, old, young);
+        final FullGC fullGC = new FullGC(heap, 0, old, young, meta, young, 0);
+        final JVM jvm = new JVM(heap, meta, minorGC, majorGC, fullGC, eden, young);
 
         final Controller controller = new Controller(jvm, sc);
 
