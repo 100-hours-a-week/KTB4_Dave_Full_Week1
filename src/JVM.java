@@ -100,11 +100,9 @@ public class JVM {
             try {
                 garbageCollect(minorGC);
             }
-            catch(Throwable t){
-                if(t instanceof OutOfMemoryError) {
-                    handleError();
-                    return;
-                }
+            catch(OutOfMemoryError t){
+                handleError();
+                return;
             }
             edenTop = 0;
         }

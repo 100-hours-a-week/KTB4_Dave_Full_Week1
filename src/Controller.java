@@ -20,11 +20,9 @@ public class Controller {
                     System.out.println(start+ "에서 " + (end-1) + " 사이의 정수를 입력해주세요.");
                 }
             }
-            catch(Exception e){
-                if(e instanceof InputMismatchException){
-                    System.out.println(start+ "에서 " + (end-1) + " 사이의 정수를 입력해주세요.");
-                    sc.next();
-                }
+            catch(InputMismatchException e){
+                System.out.println(start+ "에서 " + (end-1) + " 사이의 정수를 입력해주세요.");
+                sc.next();
             }
         }
 
@@ -40,11 +38,9 @@ public class Controller {
                     System.out.println((start-1)+ "보다 큰 정수를 입력해주세요.");
                 }
             }
-            catch(Exception e){
-                if(e instanceof InputMismatchException){
-                    System.out.println((start-1)+ "보다 큰 정수를 입력해주세요.");
-                    sc.next();
-                }
+            catch(InputMismatchException e){
+                System.out.println((start-1)+ "보다 큰 정수를 입력해주세요.");
+                sc.next();
             }
         }
 
@@ -118,10 +114,8 @@ public class Controller {
                 jvm.insertMetaData(new Data(name, exp, size));
             }
         }
-        catch(Throwable t){
-            if(t instanceof OutOfMemoryError){
-                jvm.handleError();
-            }
+        catch(OutOfMemoryError t){
+            jvm.handleError();
         }
         jvm.showData();
     }
@@ -139,10 +133,8 @@ public class Controller {
         try {
             jvm.garbageCollect();
         }
-        catch(Throwable t){
-            if(t instanceof OutOfMemoryError){
-                jvm.handleError();
-            }
+        catch(OutOfMemoryError t){
+            jvm.handleError();
         }
         jvm.showData();
     }
