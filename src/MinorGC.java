@@ -16,14 +16,14 @@ public class MinorGC extends GC{
     }
 
     @Override
-    public int[] execute(){
+    public GCResult execute(){
         // result[0] 에는 oldTop, [1]에는 정리한 메모리 수를 전송한다.
         System.out.println("Minor GC 발생");
-        int[] result = new int[2];
+        GCResult gcResult = new GCResult();
         this.search();
-        result[1] = this.cleaning();
-        result[0] = oldTop;
-        return result;
+        gcResult.setCleanDataSize(this.cleaning());
+        gcResult.setOldTop(oldTop);
+        return gcResult;
     }
 
     @Override

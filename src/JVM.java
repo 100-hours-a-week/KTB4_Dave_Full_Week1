@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class JVM {
     private final Data[] heap;
     private final Data[] meta;
@@ -46,12 +44,9 @@ public class JVM {
         // major GC만 실패해도 OOME 발생으로 대체
         // 추가로 major와 full gc의 경우 정리한 메모리 수를 전달하지만 minor의 경우 성공 아니면 실패니 성공 시 1 반환
         // 반환한 메모리가 0인 경우 실패
-        int[] result = gc.execute();
-        oldTop = result[0];
-        minorGC.setOldTop(oldTop);
-        majorGC.setTop(oldTop);
-        fullGC.setTop(oldTop);
-        if(result[1] == 0){
+        GCResult result = gc.execute();
+        oldTopSync(result.getOldTop());
+        if(result.getCleanDataSize() == 0){
             if(oldTop <= youngBound + ((heap.length-youngBound)/4) * 3){
                 // 메모리에 충분한 공간이 있을 때 FullGC를 실행했을 때는 에러를 일으키지 않아야 한다.
                 // 비율 기준으로 메모리 저장공간이 75%를 초과한 경우에 에러를 일으키도록 설정
@@ -70,7 +65,6 @@ public class JVM {
             oldTop = youngBound;
         }
         this.metaTop = fullGC.getMetaTop();
-        System.out.println("metaTop: "+metaTop);
     }
 
     public void insertHeapData(Data d){
@@ -93,9 +87,7 @@ public class JVM {
                     heap[i] = d;
                 }
                 oldTop += d.getSize();
-                minorGC.setOldTop(oldTop);
-                majorGC.setTop(oldTop);
-                fullGC.setTop(oldTop);
+                oldTopSync(oldTop);
                 return;
             }
         }
@@ -189,6 +181,12 @@ public class JVM {
         oldTop = youngBound;
         edenTop = 0;
         metaTop = 0;
+    }
+
+    public void oldTopSync(int oldTop){
+        minorGC.setOldTop(oldTop);
+        majorGC.setTop(oldTop);
+        fullGC.setTop(oldTop);
     }
 
 

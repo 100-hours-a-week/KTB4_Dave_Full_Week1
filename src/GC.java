@@ -10,13 +10,13 @@ public abstract class GC {
         this.end = end;
         this.top = top;
     }
-    public int[] execute(){
+    public GCResult execute(){
         // result[0] 에는 oldTop, [1]에는 정리한 메모리 수를 전송한다.
-        int[] result = new int[2];
+        GCResult gcResult = new GCResult();
         this.search();
-        result[1] = this.cleaning();
-        result[0] = top;
-        return result;
+        gcResult.setOldTop(this.cleaning());
+        gcResult.setCleanDataSize(top);
+        return gcResult;
     }
 
     public void setTop(int top){

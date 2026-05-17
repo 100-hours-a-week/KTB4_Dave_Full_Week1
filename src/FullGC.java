@@ -15,7 +15,7 @@ public class FullGC extends MajorGC{
     }
 
     @Override
-    public int[] execute(){
+    public GCResult execute(){
         Arrays.fill(metaMarking, false);
         return super.execute();
     }

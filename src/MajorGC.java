@@ -8,15 +8,15 @@ public class MajorGC extends GC{
     }
 
     @Override
-    public int[] execute(){
+    public GCResult execute(){
         System.out.println(this.getClass().getName()+" 발생");
         Arrays.fill(marking, false);
-        int[] result = new int[2];
+        GCResult gcResult = new GCResult();
         this.search();
-        result[1] = this.cleaning();
+        gcResult.setCleanDataSize(this.cleaning());
         this.compacting();
-        result[0] = top;
-        return result;
+        gcResult.setOldTop(top);
+        return gcResult;
     }
 
     @Override
