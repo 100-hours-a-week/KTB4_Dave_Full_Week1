@@ -182,6 +182,7 @@ public class JVM {
     }
 
     public void oldTopSync(int oldTop){
+        this.oldTop = oldTop;
         minorGC.setOldTop(oldTop);
         majorGC.setTop(oldTop);
         fullGC.setTop(oldTop);
