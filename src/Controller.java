@@ -114,9 +114,6 @@ public class Controller {
                 jvm.insertMetaData(new Data(name, exp, size));
             }
         }
-        catch(OutOfMemoryError t){
-            jvm.handleError();
-        }
         catch(IllegalArgumentException e){
             System.out.println("유효하지 않은 데이터가 입력됐습니다.");
         }
@@ -133,12 +130,7 @@ public class Controller {
     public void gcForce(){
         System.out.println("Full GC를 실행합니다.");
         System.out.println();
-        try {
-            jvm.garbageCollect();
-        }
-        catch(OutOfMemoryError t){
-            jvm.handleError();
-        }
+        jvm.garbageCollect();
         jvm.showData();
     }
 }
