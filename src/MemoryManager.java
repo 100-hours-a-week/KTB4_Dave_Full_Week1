@@ -4,9 +4,9 @@ public class MemoryManager {
     private final MinorGC minorGC;
     private final GC majorGC;
     private final FullGC fullGC; // metaTop 데이터 주고받기 위해 GC 대시 FullGC 사용
-    private int eden;
+    private final int eden;
     private int edenTop;
-    private int youngBound;
+    private final int youngBound;
     private int oldTop;
     private int metaTop;
 
@@ -23,22 +23,6 @@ public class MemoryManager {
         metaTop = 0;
     }
 
-
-    public void nextTime(int time){
-        // 데이터들의 유효기간 감소
-        for(int i = 0; i < oldTop; i++){
-            if(heap[i] != null){
-                heap[i].decreaseLiveTime(time);
-                i += heap[i].getSize() - 1;
-            }
-        }
-        for(int i = 0; i < metaTop; i++){
-            if(meta[i] != null){
-                meta[i].decreaseLiveTime(time);
-                i += meta[i].getSize() - 1;
-            }
-        }
-    }
 
     private void garbageCollect(GC gc){
         // 원래 GC의 경우 major GC 같은 게 실패하면 Full GC를 시행해야 하나 여기서는 soft reference 삭제 등의 작동을 구현하지 않았기 때문에

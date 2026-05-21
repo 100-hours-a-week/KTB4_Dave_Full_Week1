@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Main {
     public static void main(String[] args) {
@@ -17,8 +19,9 @@ public class Main {
         final MinorGC minorGC = new MinorGC(heap, 0, young, 0, eden, surv1Bound);
         final MajorGC majorGC = new MajorGC(heap,young, old, young);
         final FullGC fullGC = new FullGC(heap, 0, old, young, meta, young, 0);
+        final MemoryTimePass memoryTimePass = new MemoryTimePass(heap, meta);
         final MemoryManager memoryManager = new MemoryManager(heap, meta, minorGC, majorGC, fullGC, eden, young);
-        final JVM jvm = new JVM(memoryManager);
+        final JVM jvm = new JVM(memoryTimePass, memoryManager);
 
         final Controller controller = new Controller(jvm, sc);
 

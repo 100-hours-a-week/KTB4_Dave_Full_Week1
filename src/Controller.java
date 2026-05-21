@@ -50,15 +50,16 @@ public class Controller {
     public void run(){
         int n = 0;
 
-        while(n != 5) {
+        while(n != 6) {
             System.out.println("어떤 작업을 할지 선택해주세요.");
             System.out.println("1. 새 데이터 저장하기");
             System.out.println("2. 시간 지나가게 하기");
             System.out.println("3. 강제로 GC 실행하기");
             System.out.println("4. 데이터 초기화하기");
-            System.out.println("5. 프로그램 종료하기");
+            System.out.println("5. 데이터 출력하기");
+            System.out.println("6. 프로그램 종료하기");
 
-            n = numberInput(1, 6);
+            n = numberInput(1, 7);
             switch (n){
                 case 1:
                     insertData();
@@ -77,6 +78,10 @@ public class Controller {
                     n = 0;
                     break;
                 case 5:
+                    jvm.nowData();
+                    n = 0;
+                    break;
+                case 6:
                     System.out.println("프로그램을 종료합니다.");
             }
         }
@@ -84,11 +89,13 @@ public class Controller {
     }
 
     public void timePass(){
-        System.out.println("얼마나 시간을 지나가게 할지 입력해주세요");
-        int time = 0;
-
-        time = numberInput(1);
-        jvm.nextTime(time);
+        jvm.setTimerState();
+        if(jvm.getTimerState()) {
+            System.out.println("이제부터 시간이 흘러갑니다.");
+        }
+        else{
+            System.out.println("이제부터 시간이 흘러가지 않습니다.");
+        }
         jvm.showData();
     }
 
