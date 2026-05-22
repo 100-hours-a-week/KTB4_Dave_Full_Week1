@@ -1,6 +1,4 @@
 import java.util.Scanner;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class Main {
     public static void main(String[] args) {
@@ -8,19 +6,20 @@ public class Main {
 
         // 사용자가 힙 크기 설정을 할 경우 적당한 비율이 아닐 수 있어 단순하게 고정 크기로 제공
         // Eden과 Survivor의 크기 비는 8:1:1이 평균이지만 그럴 경우 테스트에 진행이 느려질 수 있어 적당히 작은 크기 채택
-        final int eden = 3;
-        final int young = 5;
-        final int surv1Bound = 4;
-        final int old = 15;
-        final int metaSize = 5;
+        final TopManager topManager = new TopManager();
+        final int eden = TopManager.getEden();
+        final int young = TopManager.getSurvivor2();
+        final int surv1Bound = TopManager.getSurvivor1();
+        final int old = TopManager.getOld();
+        final int metaSize = TopManager.getMeta();
         Data[] heap = new Data[old];
         Data[] meta = new Data[metaSize];
 
-        final MinorGC minorGC = new MinorGC(heap, 0, young, 0, eden, surv1Bound);
-        final MajorGC majorGC = new MajorGC(heap,young, old, young);
-        final FullGC fullGC = new FullGC(heap, 0, old, young, meta, young, 0);
+        final MinorGC minorGC = new MinorGC(heap, 0, young, topManager);
+        final MajorGC majorGC = new MajorGC(heap,young, old, topManager);
+        final FullGC fullGC = new FullGC(heap, 0, old, topManager, meta);
         final MemoryTimePass memoryTimePass = new MemoryTimePass(heap, meta);
-        final MemoryManager memoryManager = new MemoryManager(heap, meta, minorGC, majorGC, fullGC, eden, young);
+        final MemoryManager memoryManager = new MemoryManager(heap, meta, minorGC, majorGC, fullGC, topManager);
         final JVM jvm = new JVM(memoryTimePass, memoryManager);
 
         final Controller controller = new Controller(jvm, sc);

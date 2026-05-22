@@ -3,34 +3,22 @@ import java.util.Arrays;
 public class FullGC extends MajorGC{
     private Data[] meta;
     private boolean[] metaMarking;
-    private int youngBound;
-    private int metaTop;
 
-    public FullGC(Data[] heap, int start, int end, int top, Data[] meta, int youngBound, int metaTop) {
-        super(heap, start, end, top);
+    public FullGC(Data[] heap, int start, int end, TopManager topManager, Data[] meta) {
+        super(heap, start, end, topManager);
         this.meta = meta;
         metaMarking = new boolean[meta.length];
-        this.youngBound = youngBound;
-        this.metaTop = metaTop;
     }
 
     @Override
-    public GCResult execute(){
+    public void execute(){
         Arrays.fill(metaMarking, false);
-        return super.execute();
-    }
-
-
-    public void setMetaTop(int top){
-        this.metaTop = top;
-    }
-
-    public int getMetaTop(){
-        return metaTop;
+        super.execute();
     }
 
     @Override
     protected void search(){
+        int metaTop = topManager.getMetaTop();
         super.search();
         for(int i = 0; i < metaTop; i++){
             if(meta[i] != null){
@@ -45,6 +33,7 @@ public class FullGC extends MajorGC{
     protected int cleaning(){
         // 정리한 데이터 크기를 반환한다.
         int result = 0;
+        int metaTop = topManager.getMetaTop();
 
         result += super.cleaning();
 
@@ -65,8 +54,10 @@ public class FullGC extends MajorGC{
 
     @Override
     protected void compacting(){
+        int youngBound = TopManager.getSurvivor2();
+        int metaTop = topManager.getMetaTop();
         compacting(heap, start, youngBound);
-        top = compacting(heap, youngBound, end);
-        metaTop = compacting(meta, 0, metaTop);
+        topManager.setOldTop(compacting(heap, youngBound, end));
+        topManager.setMetaTop(compacting(meta, 0, metaTop));
     }
 }

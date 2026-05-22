@@ -1,33 +1,24 @@
 public class MinorGC extends GC{
-    private int edenBound; // surv1 시작점
-    private int surv1Bound; // surv2 시작점
-    private boolean nextSurv; // false면 surv1, true면 surv2로 복제
-    private int youngTop; // young에서 다음으로 복사할 주소
-    private int oldTop; // old에서 다음으로 복사할 주소
 
 
-    public MinorGC( Data[] heap, int start, int end, int top, int edenBound, int surv1Bound) {
-        super(heap, start, end, top);
-        this.edenBound = edenBound;
-        this. surv1Bound = surv1Bound;
-        this.nextSurv = false;
-        this.youngTop = edenBound;
-        this.oldTop = end;
+    public MinorGC( Data[] heap, int start, int end, TopManager topManager) {
+        super(heap, start, end, topManager);
     }
 
     @Override
-    public GCResult execute(){
+    public void execute(){
         // result[0] 에는 oldTop, [1]에는 정리한 메모리 수를 전송한다.
         System.out.println("Minor GC 발생");
-        GCResult gcResult = new GCResult();
         this.search();
-        gcResult.setCleanDataSize(this.cleaning());
-        gcResult.setOldTop(oldTop);
-        return gcResult;
+        this.cleaning();
     }
 
     @Override
     protected void search() {
+        int top = topManager.getEdenTop();
+        boolean nextSurv = topManager.getNextSurvivor();
+        int edenBound = TopManager.getEden();
+        int surv1Bound = TopManager.getSurvivor1();
         // 공간 부족 시 에러를 던져서 JVM에서 에러 처리 시키기
         for(int i = start; i < top; i++){
             if(heap[i] != null){
@@ -61,8 +52,13 @@ public class MinorGC extends GC{
 
     private int checkSize(Data d){
         // gc 생존 횟수를 넘은 경우나 young generation 공간이 부족한 경우 promotion
+        int youngTop = topManager.getYoungTop();
+        int oldTop = topManager.getOldTop();
+        boolean nextSurv = topManager.getNextSurvivor();
+        int surv1Bound = TopManager.getSurvivor1();
         int size = d.getSize();
         int now = youngTop;
+        System.out.println("now size end surv1 " + now + " " + size + " " + end + " " + surv1Bound + " " + nextSurv + " " + d.isPromotion());
         if(d.isPromotion()) {
             now = oldTop;
         }
@@ -85,8 +81,10 @@ public class MinorGC extends GC{
     private boolean copy(Data d){
         int size = d.getSize();
         int now = checkSize(d);
-        if(now == youngTop) youngTop += size;
-        else oldTop += size;
+        int youngTop = topManager.getYoungTop();
+        int oldTop = topManager.getOldTop();
+        if(now == youngTop) topManager.setYoungTop(youngTop + size);
+        else topManager.setOldTop(oldTop+size);
         if(now == -1){
             // old에도 공간이 부족한거니 OOME상태라고 판단하면 됨
             return false;
@@ -105,6 +103,9 @@ public class MinorGC extends GC{
         // 정리의 경우 major와 full의 경우 정리한 데이터 수를 반환해줄 건데 minor는 정리한 개수를 안 세니까 애매함.
         // 멤버변수로 몇개의 데이터가 있는지 알아야 하나 싶음
         // 어차피 여기서 에러 체킹이 되는게 아니라 search에서 되니까 적당히 1 반환하면 될 듯
+        int surv1Bound = TopManager.getSurvivor1();
+        boolean nextSurv = topManager.getNextSurvivor();
+        int edenBound = TopManager.getEden();
         int survBase = surv1Bound;
         if(nextSurv) survBase = edenBound;
 
@@ -115,19 +116,9 @@ public class MinorGC extends GC{
             heap[i] = null;
         }
 
-        top = start;
-        if(nextSurv){
-            nextSurv = false;
-            youngTop = edenBound;
-        }
-        else{
-            nextSurv = true;
-            youngTop = surv1Bound;
-        }
+        topManager.initEdenTop();
+        System.out.println("edenTop " + topManager.getEdenTop());
+        topManager.setNextYoungTop();
         return 1;
-    }
-
-    public void setOldTop(int top){
-        this.oldTop = top;
     }
 }
