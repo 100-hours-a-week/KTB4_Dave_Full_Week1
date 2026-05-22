@@ -10,13 +10,6 @@ public class MinorGC extends GC implements Runnable{
         execute();
     }
 
-    @Override
-    public void execute(){
-        // result[0] 에는 oldTop, [1]에는 정리한 메모리 수를 전송한다.
-        System.out.println("Minor GC 발생");
-        this.search();
-        this.cleaning();
-    }
 
     @Override
     protected void search() {

@@ -13,6 +13,7 @@ public abstract class GC {
 
 
     public void execute(){
+        System.out.println(this.getClass().getName()+" 발생");
         this.search();
         this.cleaning();
     }
