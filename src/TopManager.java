@@ -1,7 +1,9 @@
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class TopManager {
     private int edenTop;
-    private int youngTop;
-    private int oldTop;
+    private AtomicInteger youngTop;
+    private AtomicInteger oldTop;
     private int metaTop;
     private boolean nextSurvivor = false;
     private static final int eden = 3;
@@ -23,19 +25,19 @@ public class TopManager {
     }
 
     public int getYoungTop() {
-        return youngTop;
+        return youngTop.get();
     }
 
     public void setYoungTop(int youngTop) {
-        this.youngTop = youngTop;
+        this.youngTop.set(youngTop);
     }
 
     public int getOldTop() {
-        return oldTop;
+        return oldTop.get();
     }
 
     public void setOldTop(int oldTop) {
-        this.oldTop = oldTop;
+        this.oldTop.set(oldTop);
     }
 
     public int getMetaTop() {
@@ -59,22 +61,72 @@ public class TopManager {
     }
 
     public void initYoungTop(){
-        youngTop = eden;
+        youngTop.set(eden);
         nextSurvivor = false;
     }
 
     public void setNextYoungTop(){
         setNextSurvivor();
         if(nextSurvivor){
-            youngTop = survivor1;
+            youngTop.set(survivor1);
         }
         else{
-            youngTop = eden;
+            youngTop.set(eden);
         }
     }
 
+    public int getYoungCopyLoc(int size){
+        int loc;
+        int next;
+        boolean isPromotion = false;
+        do{
+            loc = youngTop.get();
+            next = loc+size;
+            if(nextSurvivor){
+                if(next > survivor2){
+                    isPromotion = true;
+                    break;
+                }
+            }
+            else{
+                if(next > survivor1){
+                    isPromotion = true;
+                    break;
+                }
+            }
+        }while(youngTop.compareAndSet(loc, next));
+
+        if(isPromotion){
+            do{
+                loc = oldTop.get();
+                next = loc + size;
+                if(next > old){
+                    next = -1;
+                    break;
+                }
+
+            } while(oldTop.compareAndSet(loc, next));
+        }
+
+        return next;
+    }
+
+    public int getOldCopyLoc(int size){
+        int loc;
+        int next;
+        do{
+            loc = oldTop.get();
+            next = loc + size;
+            if(next > old){
+                next = -1;
+                break;
+            }
+        }while(oldTop.compareAndSet(loc, next));
+        return next;
+    }
+
     public void initOldTop(){
-        oldTop = survivor2;;
+        oldTop.set(survivor2);;
     }
 
     public void initMetaTop(){

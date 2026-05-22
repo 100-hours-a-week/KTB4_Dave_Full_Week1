@@ -1,17 +1,11 @@
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 public class JVM {
     private final MemoryTimePass memoryTimePass;
     private final MemoryManager memoryManager;
-    private final ExecutorService executorService;
-    private final int threadPoolSize = 3;
     private boolean isTimerOn = false;
 
     public JVM(MemoryTimePass memoryTimePass, MemoryManager memoryManager) {
         this.memoryTimePass = memoryTimePass;
         this.memoryManager = memoryManager;
-        executorService = Executors.newFixedThreadPool(threadPoolSize);
     }
 
     public void setTimerState(){

@@ -1,5 +1,3 @@
-import java.util.concurrent.Callable;
-
 public abstract class GC {
     protected Data[] heap;
     protected int start;
