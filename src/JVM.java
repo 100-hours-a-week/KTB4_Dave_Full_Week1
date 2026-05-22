@@ -48,6 +48,10 @@ public class JVM {
         memoryManager.showData();
     }
 
+    public void shutDown(){
+        memoryManager.executorServiceShutdown();
+    }
+
     public void initData(){
         memoryManager.initData();
     }

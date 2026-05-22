@@ -82,6 +82,7 @@ public class Controller {
                     n = 0;
                     break;
                 case 6:
+                    jvm.shutDown();
                     System.out.println("프로그램을 종료합니다.");
             }
         }

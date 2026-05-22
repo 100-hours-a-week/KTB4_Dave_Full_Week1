@@ -56,7 +56,7 @@ public class FullGC extends MajorGC{
     protected void compacting(){
         int youngBound = TopManager.getSurvivor2();
         int metaTop = topManager.getMetaTop();
-        compacting(heap, start, youngBound);
+        topManager.setEdenTop(compacting(heap, start, youngBound));
         topManager.setOldTop(compacting(heap, youngBound, end));
         topManager.setMetaTop(compacting(meta, 0, metaTop));
     }

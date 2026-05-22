@@ -15,11 +15,14 @@ public class Main {
         Data[] heap = new Data[old];
         Data[] meta = new Data[metaSize];
 
-        final MinorGC minorGC = new MinorGC(heap, 0, young, topManager);
+        final MinorGC[] minorGCS = new MinorGC[3];
+        minorGCS[0] = new MinorGC(heap, 0, eden, topManager);
+        minorGCS[1] = new MinorGC(heap, eden, surv1Bound, topManager);
+        minorGCS[2] = new MinorGC(heap, surv1Bound, young, topManager);
         final MajorGC majorGC = new MajorGC(heap,young, old, topManager);
         final FullGC fullGC = new FullGC(heap, 0, old, topManager, meta);
         final MemoryTimePass memoryTimePass = new MemoryTimePass(heap, meta);
-        final MemoryManager memoryManager = new MemoryManager(heap, meta, minorGC, majorGC, fullGC, topManager);
+        final MemoryManager memoryManager = new MemoryManager(heap, meta, minorGCS, majorGC, fullGC, topManager);
         final JVM jvm = new JVM(memoryTimePass, memoryManager);
 
         final Controller controller = new Controller(jvm, sc);

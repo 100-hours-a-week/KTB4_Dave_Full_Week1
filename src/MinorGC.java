@@ -25,6 +25,7 @@ public class MinorGC extends GC implements Runnable{
             if(heap[i] != null && heap[i].isLive()){
                 Data d = heap[i];
                 if(!copy(d)){
+                    System.out.println("OOME");
                     throw new OutOfMemoryError();
                 }
                 i += d.getSize()-1;
@@ -72,9 +73,6 @@ public class MinorGC extends GC implements Runnable{
             heap[i] = null;
         }
 
-        topManager.initEdenTop();
-        System.out.println("edenTop " + topManager.getEdenTop());
-        topManager.setNextYoungTop();
         return 1;
     }
 

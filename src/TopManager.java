@@ -1,16 +1,16 @@
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class TopManager {
-    private int edenTop;
-    private AtomicInteger youngTop;
-    private AtomicInteger oldTop;
-    private int metaTop;
-    private boolean nextSurvivor = false;
     private static final int eden = 3;
     private static final int survivor1 = 4;
     private static final int survivor2 = 5;
     private static final int old = 15;
     private static final int meta = 5;
+    private int edenTop;
+    private final AtomicInteger youngTop = new AtomicInteger(eden);
+    private final AtomicInteger oldTop = new AtomicInteger(survivor2);
+    private int metaTop;
+    private boolean nextSurvivor = false;
 
     public TopManager(){
         topInit();
@@ -82,33 +82,38 @@ public class TopManager {
         do{
             loc = youngTop.get();
             next = loc+size;
+            System.out.println("loc next " + loc + " " + next);
             if(nextSurvivor){
                 if(next > survivor2){
+                    System.out.println("Surv2 검사 승격");
                     isPromotion = true;
                     break;
                 }
             }
             else{
                 if(next > survivor1){
+                    System.out.println("Surv1 검사 승격");
                     isPromotion = true;
                     break;
                 }
             }
-        }while(youngTop.compareAndSet(loc, next));
+        }while(!youngTop.compareAndSet(loc, next));
 
         if(isPromotion){
             do{
                 loc = oldTop.get();
                 next = loc + size;
+                System.out.println("loc next " + loc + " " + next);
                 if(next > old){
+                    System.out.println("Old에서도 못함");
                     next = -1;
                     break;
                 }
 
-            } while(oldTop.compareAndSet(loc, next));
+            } while(!oldTop.compareAndSet(loc, next));
         }
-
-        return next;
+        System.out.println("next " + next);
+        return loc;
     }
 
     public int getOldCopyLoc(int size){
@@ -122,7 +127,7 @@ public class TopManager {
                 break;
             }
         }while(oldTop.compareAndSet(loc, next));
-        return next;
+        return loc;
     }
 
     public void initOldTop(){

@@ -1,18 +1,25 @@
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class MemoryManager {
     private final Data[] heap;
     private final Data[] meta;
-    private final MinorGC minorGC;
+    private final MinorGC[] minorGCS;
     private final GC majorGC;
     private final FullGC fullGC; // metaTop 데이터 주고받기 위해 GC 대시 FullGC 사용
     private final TopManager topManager;
+    private final int threadPoolSize = 2;
+    private final ExecutorService executorService;
 
-    public MemoryManager(Data[] heap, Data[] meta, MinorGC minorGC, GC majorGC, FullGC fullGC, TopManager topManager){
+    public MemoryManager(Data[] heap, Data[] meta, MinorGC[] minorGCS, GC majorGC, FullGC fullGC, TopManager topManager){
         this.heap = heap;
         this.meta = meta;
-        this.minorGC = minorGC;
+        this.minorGCS = minorGCS;
         this.majorGC = majorGC;
         this.fullGC = fullGC;
         this.topManager = topManager;
+        executorService = Executors.newFixedThreadPool(threadPoolSize);
     }
 
 
@@ -66,7 +73,19 @@ public class MemoryManager {
                 garbageCollect(majorGC);
             }
             try {
-                garbageCollect(minorGC);
+                int surv = 1;
+                if(!topManager.getNextSurvivor()){
+                    surv++;
+                }
+                CompletableFuture<Void> edenFuture =
+                        CompletableFuture.runAsync(minorGCS[0], executorService);
+                CompletableFuture<Void> survivorFuture =
+                        CompletableFuture.runAsync(minorGCS[surv], executorService);
+
+                edenFuture.join();
+                survivorFuture.join();
+                topManager.initEdenTop();
+                topManager.setNextYoungTop();
                 edenTop = topManager.getEdenTop();
             }
             catch(OutOfMemoryError t){
@@ -125,5 +144,9 @@ public class MemoryManager {
     public void showData(){
         DataPrinter.printData(heap, "heap");
         DataPrinter.printData(meta, "meta");
+    }
+
+    public void executorServiceShutdown(){
+        executorService.shutdown();
     }
 }
