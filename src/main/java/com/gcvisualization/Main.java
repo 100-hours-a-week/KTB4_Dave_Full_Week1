@@ -1,3 +1,14 @@
+package com.gcvisualization;
+
+import com.gcvisualization.gc.FullGC;
+import com.gcvisualization.gc.MajorGC;
+import com.gcvisualization.gc.MinorGC;
+import com.gcvisualization.memory.Data;
+import com.gcvisualization.memory.MemoryManager;
+import com.gcvisualization.memory.MemoryTimePass;
+import com.gcvisualization.memory.TopManager;
+import com.gcvisualization.ui.Controller;
+
 import java.util.Scanner;
 
 public class Main {
@@ -7,11 +18,11 @@ public class Main {
         // 사용자가 힙 크기 설정을 할 경우 적당한 비율이 아닐 수 있어 단순하게 고정 크기로 제공
         // Eden과 Survivor의 크기 비는 8:1:1이 평균이지만 그럴 경우 테스트에 진행이 느려질 수 있어 적당히 작은 크기 채택
         final TopManager topManager = new TopManager();
-        final int eden = TopManager.getEden();
-        final int young = TopManager.getSurvivor2();
-        final int surv1Bound = TopManager.getSurvivor1();
-        final int old = TopManager.getOld();
-        final int metaSize = TopManager.getMeta();
+        final int eden = TopManager.EDEN_END;
+        final int young = TopManager.SURVIVOR_2_END;
+        final int surv1Bound = TopManager.SURVIVOR_1_END;
+        final int old = TopManager.OLD_END;
+        final int metaSize = TopManager.META_END;
         Data[] heap = new Data[old];
         Data[] meta = new Data[metaSize];
 

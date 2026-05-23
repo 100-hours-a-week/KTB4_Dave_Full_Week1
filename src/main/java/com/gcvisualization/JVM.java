@@ -1,3 +1,10 @@
+package com.gcvisualization;
+
+import com.gcvisualization.exception.OOMEHandler;
+import com.gcvisualization.memory.Data;
+import com.gcvisualization.memory.MemoryManager;
+import com.gcvisualization.memory.MemoryTimePass;
+
 public class JVM {
     private final MemoryTimePass memoryTimePass;
     private final MemoryManager memoryManager;
@@ -8,10 +15,14 @@ public class JVM {
         this.memoryManager = memoryManager;
     }
 
-    public void setTimerState(){
+    public void passTimeIfNeeded(){
         if(isTimerOn){
             memoryTimePass.timePass();
         }
+    }
+
+    public void setTimerState(){
+        passTimeIfNeeded();
         isTimerOn = !isTimerOn;
         memoryTimePass.timeStart();
     }
@@ -20,24 +31,18 @@ public class JVM {
     }
 
     public void garbageCollect(){
-        if(isTimerOn) {
-            memoryTimePass.timePass();
-        }
-        ExceptionHandler.OOMEHandler(memoryManager::garbageCollect, this::initData);
+        passTimeIfNeeded();
+        OOMEHandler.execute(memoryManager::garbageCollect, this::initData);
     }
 
     public void insertHeapData(Data d){
-        if(isTimerOn) {
-            memoryTimePass.timePass();
-        }
-        ExceptionHandler.OOMEHandler(memoryManager::insertHeapData, d, this::initData);
+        passTimeIfNeeded();
+        OOMEHandler.execute(memoryManager::insertHeapData, d, this::initData);
     }
 
     public void insertMetaData(Data d){
-        if(isTimerOn) {
-            memoryTimePass.timePass();
-        }
-        ExceptionHandler.OOMEHandler(memoryManager::insertMetaData, d, this::initData);
+        passTimeIfNeeded();
+        OOMEHandler.execute(memoryManager::insertMetaData, d, this::initData);
     }
 
     public void showData(){
@@ -45,9 +50,7 @@ public class JVM {
     }
 
     public void nowData(){
-        if(isTimerOn){
-            memoryTimePass.timePass();
-        }
+        passTimeIfNeeded();
         memoryManager.showData();
     }
 

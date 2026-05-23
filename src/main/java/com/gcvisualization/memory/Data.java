@@ -1,3 +1,5 @@
+package com.gcvisualization.memory;
+
 public class Data {
     private final String name;
     private int liveTime;

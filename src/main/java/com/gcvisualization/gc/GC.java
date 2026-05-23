@@ -1,3 +1,8 @@
+package com.gcvisualization.gc;
+
+import com.gcvisualization.memory.Data;
+import com.gcvisualization.memory.TopManager;
+
 public abstract class GC {
     protected final Data[] heap;
     protected final int start; //

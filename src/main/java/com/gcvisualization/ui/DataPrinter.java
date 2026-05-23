@@ -1,3 +1,7 @@
+package com.gcvisualization.ui;
+
+import com.gcvisualization.memory.Data;
+
 public class DataPrinter {
     private DataPrinter(){
 

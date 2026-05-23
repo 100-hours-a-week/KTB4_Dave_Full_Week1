@@ -1,3 +1,5 @@
+package com.gcvisualization.memory;
+
 public class MemoryTimePass {
     private final Data[] heap;
     private final Data[] meta;

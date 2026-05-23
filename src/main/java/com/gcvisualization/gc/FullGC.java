@@ -1,3 +1,8 @@
+package com.gcvisualization.gc;
+
+import com.gcvisualization.memory.Data;
+import com.gcvisualization.memory.TopManager;
+
 import java.util.Arrays;
 
 public class FullGC extends MajorGC{
@@ -54,7 +59,7 @@ public class FullGC extends MajorGC{
 
     @Override
     protected void compacting(){
-        int youngBound = TopManager.getSurvivor2();
+        int youngBound = TopManager.SURVIVOR_2_END;
         int metaTop = topManager.getMetaTop();
         topManager.setEdenTop(compacting(heap, start, youngBound));
         topManager.setOldTop(compacting(heap, youngBound, end));

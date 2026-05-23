@@ -1,3 +1,8 @@
+package com.gcvisualization.ui;
+
+import com.gcvisualization.JVM;
+import com.gcvisualization.memory.Data;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -5,13 +10,13 @@ public class Controller {
     private final JVM jvm;
     private final Scanner sc;
     private static final String menuText = """
-                    어떤 작업을 할지 선택해주세요.
-                    1. 새 데이터 저장하기
-                    2. 시간 지나가게 하기
-                    3. 강제로 GC 실행하기
-                    4. 데이터 초기화하기
-                    5. 데이터 출력하기
-                    6. 프로그램 종료하기
+            어떤 작업을 할지 선택해주세요.
+            1. 새 데이터 저장하기
+            2. 시간 지나가게 하기
+            3. 강제로 GC 실행하기
+            4. 데이터 초기화하기
+            5. 데이터 출력하기
+            6. 프로그램 종료하기
             """;
 
     public Controller(JVM jvm, Scanner sc) {
@@ -21,16 +26,17 @@ public class Controller {
 
     public int numberInput(int start, int end){
         int num = end;
+        String msg = start+ "에서 " + (end-1) + " 사이의 정수를 입력해주세요.";
 
         while(num < start || num >= end){
             try {
                 num = sc.nextInt();
                 if(num < start || num >= end){
-                    System.out.println(start+ "에서 " + (end-1) + " 사이의 정수를 입력해주세요.");
+                    System.out.println(msg);
                 }
             }
             catch(InputMismatchException e){
-                System.out.println(start+ "에서 " + (end-1) + " 사이의 정수를 입력해주세요.");
+                System.out.println(msg);
                 sc.next();
             }
         }
@@ -40,15 +46,16 @@ public class Controller {
 
     public int numberInput(int start){
         int num = 0;
+        String msg = (start-1)+ "보다 큰 정수를 입력해주세요.";
         while(num < start){
             try {
                 num = sc.nextInt();
                 if(num < start){
-                    System.out.println((start-1)+ "보다 큰 정수를 입력해주세요.");
+                    System.out.println(msg);
                 }
             }
             catch(InputMismatchException e){
-                System.out.println((start-1)+ "보다 큰 정수를 입력해주세요.");
+                System.out.println(msg);
                 sc.next();
             }
         }
