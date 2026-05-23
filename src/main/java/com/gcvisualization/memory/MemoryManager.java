@@ -67,8 +67,6 @@ public class MemoryManager {
     public void insertHeapData(Data d){
         // 에덴에 값을 넣을 때 자리가 부족하면 minor com.gcvisualization.gc.GC 실행
         // minor com.gcvisualization.gc.GC 검사 전에 조건 만족 시 major GC를 먼저 수행.
-        int eden = TopManager.EDEN_END;
-        int oldTop = topManager.getOldTop();
         int edenTop = topManager.getEdenTop();
         int size = d.getSize();
         int now = topManager.allocateEden(size);
@@ -113,7 +111,6 @@ public class MemoryManager {
     public void insertMetaData(Data d){
         // meta 데이터 넣을 자리 부족하면 full com.gcvisualization.gc.GC 실행
         // 여기선 콘솔 프로그램이니 하나씩만 넣으니까 Full com.gcvisualization.gc.GC 시 1 이상의 값만 확보되면 상관없고 0일 경우 에러 던지기
-        int metaTop = topManager.getMetaTop();
         int size = d.getSize();
         int now = topManager.allocateMeta(size);
 
