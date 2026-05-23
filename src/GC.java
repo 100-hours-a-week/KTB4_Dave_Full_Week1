@@ -1,8 +1,8 @@
 public abstract class GC {
-    protected Data[] heap;
-    protected int start;
-    protected int end;
-    protected TopManager topManager;
+    protected final Data[] heap;
+    protected final int start; //
+    protected final int end; //
+    protected final TopManager topManager;
 
     public GC(Data[] heap, int start, int end, TopManager topManager){
         this.heap = heap;

@@ -1,7 +1,7 @@
 import java.util.Arrays;
 
 public class MajorGC extends GC{
-    protected boolean[] marking;
+    protected final boolean[] marking;
     public MajorGC(Data[] heap, int start, int end, TopManager topManager) {
         super(heap, start, end, topManager);
         this.marking = new boolean[end - start];

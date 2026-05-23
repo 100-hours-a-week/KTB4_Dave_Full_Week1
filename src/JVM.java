@@ -9,6 +9,9 @@ public class JVM {
     }
 
     public void setTimerState(){
+        if(isTimerOn){
+            memoryTimePass.timePass();
+        }
         isTimerOn = !isTimerOn;
         memoryTimePass.timeStart();
     }

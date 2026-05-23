@@ -8,6 +8,9 @@ public class ExceptionHandler {
                 System.out.println("프로세스 종료. 메모리 초기화를 진행합니다.");
                 r.run();
             }
+            else{
+                e.printStackTrace();
+            }
         }
     }
 
@@ -19,6 +22,9 @@ public class ExceptionHandler {
                 System.out.println("OOME 발생");
                 System.out.println("프로세스 종료. 메모리 초기화를 진행합니다.");
                 r.run();
+            }
+            else{
+                e.printStackTrace();
             }
         }
     }

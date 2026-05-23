@@ -3,7 +3,7 @@ public class MemoryTimePass {
     private final Data[] meta;
     private long start;
     private long remain = 0;
-    private final long msToSecond = 1000;
+    private static final long msToSecond = 1000;
 
 
     public MemoryTimePass(Data[] heap, Data[] meta) {

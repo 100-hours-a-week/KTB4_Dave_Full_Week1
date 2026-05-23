@@ -9,7 +9,7 @@ public class MemoryManager {
     private final GC majorGC;
     private final FullGC fullGC; // metaTop 데이터 주고받기 위해 GC 대시 FullGC 사용
     private final TopManager topManager;
-    private final int threadPoolSize = 2;
+    private static final int threadPoolSize = 2;
     private final ExecutorService executorService;
 
     public MemoryManager(Data[] heap, Data[] meta, MinorGC[] minorGCS, GC majorGC, FullGC fullGC, TopManager topManager){

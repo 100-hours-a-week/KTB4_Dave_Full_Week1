@@ -4,6 +4,15 @@ import java.util.Scanner;
 public class Controller {
     private final JVM jvm;
     private final Scanner sc;
+    private static final String menuText = """
+                    어떤 작업을 할지 선택해주세요.
+                    1. 새 데이터 저장하기
+                    2. 시간 지나가게 하기
+                    3. 강제로 GC 실행하기
+                    4. 데이터 초기화하기
+                    5. 데이터 출력하기
+                    6. 프로그램 종료하기
+            """;
 
     public Controller(JVM jvm, Scanner sc) {
         this.jvm = jvm;
@@ -49,41 +58,20 @@ public class Controller {
 
     public void run(){
         int n = 0;
-
-        while(n != 6) {
-            System.out.println("어떤 작업을 할지 선택해주세요.");
-            System.out.println("1. 새 데이터 저장하기");
-            System.out.println("2. 시간 지나가게 하기");
-            System.out.println("3. 강제로 GC 실행하기");
-            System.out.println("4. 데이터 초기화하기");
-            System.out.println("5. 데이터 출력하기");
-            System.out.println("6. 프로그램 종료하기");
-
+        while(true) {
+            System.out.println(menuText);
             n = numberInput(1, 7);
             switch (n){
-                case 1:
-                    insertData();
-                    n = 0;
-                    break;
-                case 2:
-                    timePass();
-                    n = 0;
-                    break;
-                case 3:
-                    gcForce();
-                    n = 0;
-                    break;
-                case 4:
-                    dataInit();
-                    n = 0;
-                    break;
-                case 5:
-                    jvm.nowData();
-                    n = 0;
-                    break;
-                case 6:
+                case 1 -> insertData();
+                case 2 -> timePass();
+                case 3 -> gcForce();
+                case 4 -> dataInit();
+                case 5 -> jvm.nowData();
+                case 6 -> {
                     jvm.shutDown();
                     System.out.println("프로그램을 종료합니다.");
+                    return;
+                }
             }
         }
 
@@ -129,15 +117,13 @@ public class Controller {
     }
 
     public void dataInit(){
-        System.out.println("힙 영역 데이터와 메타 스페이스를 정리하겠습니다.");
-        System.out.println();
+        System.out.println("힙 영역 데이터와 메타 스페이스를 정리하겠습니다.\n");
         jvm.initData();
         jvm.showData();
     }
 
     public void gcForce(){
-        System.out.println("Full GC를 실행합니다.");
-        System.out.println();
+        System.out.println("Full GC를 실행합니다.\n");
         jvm.garbageCollect();
         jvm.showData();
     }

@@ -4,16 +4,21 @@ public class DataPrinter {
     }
 
     public static void printData(Data[] data, String name){
-        System.out.println(name +" 영역 데이터");
-        System.out.print("| ");
+        StringBuilder sb = new StringBuilder();
+        sb.append(name)
+        .append(" 영역 데이터\n")
+        .append("| ");
         for(int i = 0; i < data.length; i++){
             if(data[i] != null) {
-                System.out.print(data[i].getName()+" : " + data[i].getLiveTime() +" | ");
+                sb.append(data[i].getName())
+                .append(" : ")
+                .append(data[i].getLiveTime());
             }
             else{
-                System.out.print("X : X | ");
+                sb.append("X : X");
             }
+            sb.append(" | ");
         }
-        System.out.println();
+        System.out.println(sb);
     }
 }

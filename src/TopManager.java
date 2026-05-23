@@ -24,14 +24,6 @@ public class TopManager {
         this.edenTop = edenTop;
     }
 
-    public int getYoungTop() {
-        return youngTop.get();
-    }
-
-    public void setYoungTop(int youngTop) {
-        this.youngTop.set(youngTop);
-    }
-
     public int getOldTop() {
         return oldTop.get();
     }
@@ -82,17 +74,14 @@ public class TopManager {
         do{
             loc = youngTop.get();
             next = loc+size;
-            System.out.println("loc next " + loc + " " + next);
             if(nextSurvivor){
                 if(next > survivor2){
-                    System.out.println("Surv2 검사 승격");
                     isPromotion = true;
                     break;
                 }
             }
             else{
                 if(next > survivor1){
-                    System.out.println("Surv1 검사 승격");
                     isPromotion = true;
                     break;
                 }
@@ -103,16 +92,12 @@ public class TopManager {
             do{
                 loc = oldTop.get();
                 next = loc + size;
-                System.out.println("loc next " + loc + " " + next);
                 if(next > old){
-                    System.out.println("Old에서도 못함");
-                    next = -1;
-                    break;
+                    return -1;
                 }
 
             } while(!oldTop.compareAndSet(loc, next));
         }
-        System.out.println("next " + next);
         return loc;
     }
 
@@ -123,8 +108,7 @@ public class TopManager {
             loc = oldTop.get();
             next = loc + size;
             if(next > old){
-                next = -1;
-                break;
+                return -1;
             }
         }while(oldTop.compareAndSet(loc, next));
         return loc;

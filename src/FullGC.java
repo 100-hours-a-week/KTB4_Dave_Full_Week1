@@ -1,8 +1,8 @@
 import java.util.Arrays;
 
 public class FullGC extends MajorGC{
-    private Data[] meta;
-    private boolean[] metaMarking;
+    private final Data[] meta;
+    private final boolean[] metaMarking;
 
     public FullGC(Data[] heap, int start, int end, TopManager topManager, Data[] meta) {
         super(heap, start, end, topManager);
