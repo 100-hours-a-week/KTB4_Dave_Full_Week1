@@ -137,7 +137,7 @@ public class TopManager {
     }
 
     public void initOldTop(){
-        oldTop.set(SURVIVOR_2_END);;
+        oldTop.set(SURVIVOR_2_END);
     }
 
     public void initMetaTop(){

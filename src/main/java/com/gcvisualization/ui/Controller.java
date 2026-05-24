@@ -16,8 +16,7 @@ public class Controller {
             3. 강제로 GC 실행하기
             4. 데이터 초기화하기
             5. 데이터 출력하기
-            6. 프로그램 종료하기
-            """;
+            6. 프로그램 종료하기""";
 
     public Controller(JVM jvm, Scanner sc) {
         this.jvm = jvm;
@@ -64,7 +63,7 @@ public class Controller {
     }
 
     public void run(){
-        int n = 0;
+        int n;
         while(true) {
             System.out.println(menuText);
             n = numberInput(1, 7);
