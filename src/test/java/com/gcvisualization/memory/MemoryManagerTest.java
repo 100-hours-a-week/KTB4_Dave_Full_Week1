@@ -7,7 +7,6 @@ import com.gcvisualization.gc.MinorGC;
 import com.gcvisualization.gcphase.ParallelCompactor;
 import com.gcvisualization.gcphase.ParallelMarker;
 import com.gcvisualization.gcphase.ParallelSweeper;
-import com.gcvisualization.gcphase.Sweeper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
