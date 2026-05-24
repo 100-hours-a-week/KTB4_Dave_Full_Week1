@@ -15,7 +15,7 @@ public class JVM {
         this.memoryManager = memoryManager;
     }
 
-    public void passTimeIfNeeded(){
+    private void passTimeIfNeeded(){
         if(isTimerOn){
             memoryTimePass.timePass();
         }

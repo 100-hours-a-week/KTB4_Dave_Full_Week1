@@ -52,14 +52,6 @@ public class TopManager {
         return nextSurvivor;
     }
 
-    public void initEdenTop(){
-        edenTop = 0;
-    }
-
-    public void initSurvivorTop(){
-        survivorTop.set(EDEN_END);
-        nextSurvivor = false;
-    }
 
     public void setNextSurvivorTop(){
         setNextSurvivor();
@@ -134,6 +126,16 @@ public class TopManager {
         }
         metaTop = next;
         return loc;
+    }
+
+
+    public void initEdenTop(){
+        edenTop = 0;
+    }
+
+    public void initSurvivorTop(){
+        survivorTop.set(EDEN_END);
+        nextSurvivor = false;
     }
 
     public void initOldTop(){
