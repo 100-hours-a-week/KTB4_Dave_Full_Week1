@@ -57,7 +57,9 @@ public class MinorGC extends GC implements Runnable{
         }
         else{
             now = topManager.allocateSurvivor(size);
+            System.out.println("name now "+ d.getName() + " " + now);
             if(now == TopManager.RETRYABLE_FAILURE){
+                System.out.println("promotion");
                 return promotion(d);
             }
         }
@@ -73,6 +75,7 @@ public class MinorGC extends GC implements Runnable{
     private boolean promotion(Data d){
         int size = d.getSize();
         int now = topManager.allocateOld(size);
+        System.out.println("name now "+ d.getName() + " " + now);
         if(now == TopManager.RETRYABLE_FAILURE){
             // 보통 Major GC를 실행한 후 minor GC를 실행하기에 공간이 부족한 경우 전체 공간의 부족을 의미한다.
             return false;
@@ -90,19 +93,20 @@ public class MinorGC extends GC implements Runnable{
         // 정리의 경우 major와 full의 경우 정리한 데이터 수를 반환해줄 건데 minor는 정리한 개수를 안 세니까 애매함.
         // 멤버변수로 몇개의 데이터가 있는지 알아야 하나 싶음
         // 어차피 여기서 에러 체킹이 되는게 아니라 search에서 되니까 적당히 1 반환하면 될 듯
-        int surv1Bound = TopManager.SURVIVOR_1_END;
+        int survStart = TopManager.EDEN_END;
+        int survEnd = TopManager.SURVIVOR_1_END;
         boolean nextSurv = topManager.getNextSurvivor();
-        int edenBound = TopManager.EDEN_END;
-        int survBase = surv1Bound;
-        if(nextSurv) survBase = edenBound;
-
-        for(int i = start; i < edenBound; i++){
-            heap[i] = null;
-        }
-        for(int i = survBase; i < survBase + (surv1Bound - edenBound); i++){
-            heap[i] = null;
+        if(nextSurv){
+            survStart = TopManager.SURVIVOR_1_END;
+            survEnd = TopManager.SURVIVOR_2_END;
         }
 
+        for(int i = start; i < end; i++){
+            if(i >= survStart && i < survEnd){
+                continue;
+            }
+            heap[i] = null;
+        }
     }
 
 }
