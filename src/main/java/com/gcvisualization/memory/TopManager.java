@@ -9,7 +9,7 @@ public class TopManager {
     public static final int OLD_END = 15;
     public static final int META_END = 5;
     private int edenTop;
-    private final AtomicInteger youngTop = new AtomicInteger(EDEN_END);
+    private final AtomicInteger survivorTop = new AtomicInteger(EDEN_END);
     private final AtomicInteger oldTop = new AtomicInteger(SURVIVOR_2_END);
     private int metaTop;
     private boolean nextSurvivor = false;
@@ -56,18 +56,18 @@ public class TopManager {
         edenTop = 0;
     }
 
-    public void initYoungTop(){
-        youngTop.set(EDEN_END);
+    public void initSurvivorTop(){
+        survivorTop.set(EDEN_END);
         nextSurvivor = false;
     }
 
-    public void setNextYoungTop(){
+    public void setNextSurvivorTop(){
         setNextSurvivor();
         if(nextSurvivor){
-            youngTop.set(SURVIVOR_1_END);
+            survivorTop.set(SURVIVOR_1_END);
         }
         else{
-            youngTop.set(EDEN_END);
+            survivorTop.set(EDEN_END);
         }
     }
 
@@ -86,7 +86,7 @@ public class TopManager {
         return loc;
     }
 
-    public int allocateYoung(int size){
+    public int allocateSurvivor(int size){
         int loc;
         int next;
         int limit = SURVIVOR_1_END;
@@ -95,12 +95,12 @@ public class TopManager {
         }
 
         do{
-            loc = youngTop.get();
+            loc = survivorTop.get();
             next = loc+size;
             if(next > limit){
                 return RETRYABLE_FAILURE;
             }
-        }while(!youngTop.compareAndSet(loc, next));
+        }while(!survivorTop.compareAndSet(loc, next));
 
         return loc;
     }
@@ -146,7 +146,7 @@ public class TopManager {
 
     public void topInit(){
         initEdenTop();
-        initYoungTop();
+        initSurvivorTop();
         initOldTop();
         initMetaTop();
     }

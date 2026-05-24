@@ -44,6 +44,10 @@ public class Data {
         return size;
     }
 
+    public int getGcTime(){
+        return gcTime;
+    }
+
     public boolean isPromotion(){
         return gcTime > 2;
     }

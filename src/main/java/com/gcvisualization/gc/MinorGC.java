@@ -41,7 +41,7 @@ public class MinorGC extends GC implements Runnable{
                 Data d = heap[i];
                 if(!copy(d)){
                     System.out.println("OOME");
-                    throw new OutOfMemoryError();
+                    throw new OutOfMemoryError("promotionFailed");
                 }
                 i += d.getSize()-1;
             }
@@ -56,7 +56,7 @@ public class MinorGC extends GC implements Runnable{
             return promotion(d);
         }
         else{
-            now = topManager.allocateYoung(size);
+            now = topManager.allocateSurvivor(size);
             if(now == TopManager.RETRYABLE_FAILURE){
                 return promotion(d);
             }

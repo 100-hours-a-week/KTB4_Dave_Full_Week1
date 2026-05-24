@@ -50,7 +50,7 @@ public class MemoryManager {
         edenFuture.join();
         survivorFuture.join();
         topManager.initEdenTop();
-        topManager.setNextYoungTop();
+        topManager.setNextSurvivorTop();
     }
 
     public void garbageCollect(){
