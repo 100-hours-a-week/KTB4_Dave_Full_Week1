@@ -32,7 +32,8 @@ public class MinorGCTest {
     @Test
     void minorGC_shouldCopyLiveObjectToSurvivor(){
         Data d = new Data("test", 1, 1);
-        data[0] = d;
+        int now = topManager.allocateEden(1);
+        data[now] = d;
 
         int survivor = TopManager.EDEN_END;
         int survivorEnd = TopManager.SURVIVOR_1_END;
@@ -49,11 +50,19 @@ public class MinorGCTest {
     void minorGC_shouldCleanYoungGeneration(){
         Data edenTest = new Data("eden", 1, 1);
         Data survivorTest = new Data("survivor", 1, 1);
-        edenTest.decreaseLiveTime(1);
-        survivorTest.decreaseLiveTime(1);
+        while(edenTest.isLive()) {
+            edenTest.decreaseLiveTime(1);
+        }
+        while(survivorTest.isLive()) {
+            survivorTest.decreaseLiveTime(1);
+        }
+        int now = topManager.allocateEden(1);
+        data[now] = edenTest;
+        now = topManager.allocateSurvivor(1);
+        data[now] = survivorTest;
+        // 기존의 allocateSurvivor이 복사할 위치를 할당하는 것을 고려해 nextSurvivor 전환 필요
+        topManager.setNextSurvivorTop();
 
-        data[0] = edenTest;
-        data[TopManager.SURVIVOR_1_END] = survivorTest;
 
         minorGC.execute();
         int youngEnd = TopManager.SURVIVOR_2_END;
@@ -66,11 +75,19 @@ public class MinorGCTest {
     void minorGC_shouldNotCopyDeadObject(){
         Data edenTest = new Data("eden", 1, 1);
         Data survivorTest = new Data("survivor", 1, 1);
-        edenTest.decreaseLiveTime(1);
-        survivorTest.decreaseLiveTime(1);
+        while(edenTest.isLive()) {
+            edenTest.decreaseLiveTime(1);
+        }
+        while(survivorTest.isLive()) {
+            survivorTest.decreaseLiveTime(1);
+        }
 
-        data[0] = edenTest;
-        data[TopManager.SURVIVOR_1_END] = survivorTest;
+        int now = topManager.allocateEden(1);
+        data[now] = edenTest;
+        now = topManager.allocateSurvivor(1);
+        data[now] = survivorTest;
+        // 기존의 allocateSurvivor이 복사할 위치를 할당하는 것을 고려해 nextSurvivor 전환 필요
+        topManager.setNextSurvivorTop();
 
         minorGC.execute();
         int oldEnd = TopManager.OLD_END;
@@ -85,7 +102,8 @@ public class MinorGCTest {
         while(!d.isPromotion()){
             d.surviveGC();
         }
-        data[0] = d;
+        int now = topManager.allocateEden(1);
+        data[now] = d;
 
         minorGC.execute();
         assertTrue(existsInRange(d, TopManager.SURVIVOR_2_END, TopManager.OLD_END));
@@ -94,7 +112,8 @@ public class MinorGCTest {
     @Test
     void minorGC_shouldIncreaseObjectAge(){
         Data d = new Data("test", 1, 1);
-        data[0] = d;
+        int now = topManager.allocateEden(1);
+        data[now] = d;
         int before = d.getGcTime();
         minorGC.execute();
 
@@ -110,7 +129,8 @@ public class MinorGCTest {
         while(!d.isPromotion()){
             d.surviveGC();
         }
-        data[0] = d;
+        int now = topManager.allocateEden(1);
+        data[now] = d;
 
         assertThrows(OutOfMemoryError.class, minorGC::execute);
 

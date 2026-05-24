@@ -11,6 +11,7 @@ public class ParallelSweeper implements Sweeper {
             if(data[i] != null){
                 if(mark[i]) {
                     i += data[i].getSize() - 1;
+                    continue;
                 }
                 if(!mark[i]) {
                     data[i] = null;

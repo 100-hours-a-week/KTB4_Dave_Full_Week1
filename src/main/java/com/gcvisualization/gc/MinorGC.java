@@ -57,9 +57,7 @@ public class MinorGC extends GC implements Runnable{
         }
         else{
             now = topManager.allocateSurvivor(size);
-            System.out.println("name now "+ d.getName() + " " + now);
             if(now == TopManager.RETRYABLE_FAILURE){
-                System.out.println("promotion");
                 return promotion(d);
             }
         }
@@ -75,7 +73,6 @@ public class MinorGC extends GC implements Runnable{
     private boolean promotion(Data d){
         int size = d.getSize();
         int now = topManager.allocateOld(size);
-        System.out.println("name now "+ d.getName() + " " + now);
         if(now == TopManager.RETRYABLE_FAILURE){
             // 보통 Major GC를 실행한 후 minor GC를 실행하기에 공간이 부족한 경우 전체 공간의 부족을 의미한다.
             return false;
