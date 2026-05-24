@@ -53,17 +53,13 @@ public class MinorGC extends GC implements Runnable{
         int size = d.getSize();
         int now;
         if(d.isPromotion()){
-            now = topManager.allocateOld(size);
+            return promotion(d);
         }
         else{
             now = topManager.allocateYoung(size);
             if(now == TopManager.RETRYABLE_FAILURE){
-                now = topManager.allocateOld(size);
+                return promotion(d);
             }
-        }
-        if(now == TopManager.RETRYABLE_FAILURE){
-            // Major GC를 실행한 후 mi
-            return false;
         }
 
         for(int i = 0; i < size; i++){
@@ -74,8 +70,23 @@ public class MinorGC extends GC implements Runnable{
         return true;
     }
 
+    private boolean promotion(Data d){
+        int size = d.getSize();
+        int now = topManager.allocateOld(size);
+        if(now == TopManager.RETRYABLE_FAILURE){
+            // 보통 Major GC를 실행한 후 minor GC를 실행하기에 공간이 부족한 경우 전체 공간의 부족을 의미한다.
+            return false;
+        }
+        for(int i = 0; i < size; i++){
+            heap[now+i] = d;
+        }
+        d.surviveGC();
+        return true;
+    }
+
+
     @Override
-    protected int cleaning() {
+    protected void cleaning() {
         // 정리의 경우 major와 full의 경우 정리한 데이터 수를 반환해줄 건데 minor는 정리한 개수를 안 세니까 애매함.
         // 멤버변수로 몇개의 데이터가 있는지 알아야 하나 싶음
         // 어차피 여기서 에러 체킹이 되는게 아니라 search에서 되니까 적당히 1 반환하면 될 듯
@@ -92,7 +103,6 @@ public class MinorGC extends GC implements Runnable{
             heap[i] = null;
         }
 
-        return 1;
     }
 
 }

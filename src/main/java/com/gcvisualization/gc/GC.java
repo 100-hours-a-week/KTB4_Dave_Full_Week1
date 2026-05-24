@@ -24,5 +24,5 @@ public abstract class GC {
     }
 
     protected abstract void search();
-    protected abstract int cleaning();
+    protected abstract void cleaning();
 }

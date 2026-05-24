@@ -152,6 +152,6 @@ public class TopManager {
     }
 
     public boolean oldAreaCheck(){
-        return (OLD_END-oldTop.get()) >= EDEN_END;
+        return (OLD_END-oldTop.get()) >= SURVIVOR_1_END;
     }
 }

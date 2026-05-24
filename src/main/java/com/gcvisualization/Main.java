@@ -3,6 +3,7 @@ package com.gcvisualization;
 import com.gcvisualization.gc.FullGC;
 import com.gcvisualization.gc.MajorGC;
 import com.gcvisualization.gc.MinorGC;
+import com.gcvisualization.gcphase.*;
 import com.gcvisualization.memory.Data;
 import com.gcvisualization.memory.MemoryManager;
 import com.gcvisualization.memory.MemoryTimePass;
@@ -23,15 +24,22 @@ public class Main {
         final int surv1Bound = TopManager.SURVIVOR_1_END;
         final int old = TopManager.OLD_END;
         final int metaSize = TopManager.META_END;
-        Data[] heap = new Data[old];
-        Data[] meta = new Data[metaSize];
+        final Data[] heap = new Data[old];
+        final Data[] meta = new Data[metaSize];
+        final boolean[] mark = new boolean[old];
+        final boolean[] metaMark = new boolean[metaSize];
 
         final MinorGC[] minorGCS = new MinorGC[3];
         minorGCS[0] = new MinorGC(heap, 0, eden, topManager);
         minorGCS[1] = new MinorGC(heap, eden, surv1Bound, topManager);
         minorGCS[2] = new MinorGC(heap, surv1Bound, young, topManager);
-        final MajorGC majorGC = new MajorGC(heap,young, old, topManager);
-        final FullGC fullGC = new FullGC(heap, 0, old, topManager, meta);
+
+        final Marker marker = new ParallelMarker();
+        final Sweeper sweeper = new ParallelSweeper();
+        final Compactor compactor = new ParallelCompactor();
+
+        final MajorGC majorGC = new MajorGC(heap, mark, young, old, topManager, marker, sweeper, compactor);
+        final FullGC fullGC = new FullGC(heap, mark, meta, metaMark, 0, old, topManager, marker, sweeper, compactor);
         final MemoryTimePass memoryTimePass = new MemoryTimePass(heap, meta);
         final MemoryManager memoryManager = new MemoryManager(heap, meta, minorGCS, majorGC, fullGC, topManager);
         final JVM jvm = new JVM(memoryTimePass, memoryManager);
