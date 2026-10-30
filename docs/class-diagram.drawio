@@ -1,0 +1,245 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="현재 구조" id="gcvis-current">
+    <mxGraphModel dx="915" dy="594" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2080" pageHeight="1774" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="pkg-ui" parent="1" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;fillColor=none;strokeColor=#9E9E9E;fontColor=#757575;verticalAlign=top;align=left;spacingLeft=8;spacingTop=2;fontStyle=1;" value="com.gcvisualization.ui" vertex="1">
+          <mxGeometry height="587" width="360" x="20" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="pkg-root" parent="1" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;fillColor=none;strokeColor=#9E9E9E;fontColor=#757575;verticalAlign=top;align=left;spacingLeft=8;spacingTop=2;fontStyle=1;" value="com.gcvisualization" vertex="1">
+          <mxGeometry height="314" width="280" x="410" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="pkg-exc" parent="1" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;fillColor=none;strokeColor=#9E9E9E;fontColor=#757575;verticalAlign=top;align=left;spacingLeft=8;spacingTop=2;fontStyle=1;" value="com.gcvisualization.exception" vertex="1">
+          <mxGeometry height="154" width="470" x="410" y="376" as="geometry" />
+        </mxCell>
+        <mxCell id="pkg-fn" parent="1" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;fillColor=none;strokeColor=#9E9E9E;fontColor=#757575;verticalAlign=top;align=left;spacingLeft=8;spacingTop=2;fontStyle=1;" value="com.gcvisualization.functional" vertex="1">
+          <mxGeometry height="129" width="420" x="410" y="566" as="geometry" />
+        </mxCell>
+        <mxCell id="pkg-mem" parent="1" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;fillColor=none;strokeColor=#9E9E9E;fontColor=#757575;verticalAlign=top;align=left;spacingLeft=8;spacingTop=2;fontStyle=1;" value="com.gcvisualization.memory" vertex="1">
+          <mxGeometry height="604" width="1060" x="980" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="pkg-gc" parent="1" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;fillColor=none;strokeColor=#9E9E9E;fontColor=#757575;verticalAlign=top;align=left;spacingLeft=8;spacingTop=2;fontStyle=1;" value="com.gcvisualization.gc" vertex="1">
+          <mxGeometry height="558" width="1145" x="410" y="791" as="geometry" />
+        </mxCell>
+        <mxCell id="pkg-phase" parent="1" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;fillColor=none;strokeColor=#9E9E9E;fontColor=#757575;verticalAlign=top;align=left;spacingLeft=8;spacingTop=2;fontStyle=1;" value="com.gcvisualization.gcphase" vertex="1">
+          <mxGeometry height="269" width="1470" x="410" y="1465" as="geometry" />
+        </mxCell>
+        <mxCell id="Controller" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Controller&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- jvm: JVM&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- sc: Scanner&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;u&gt;- menuText: String&lt;/u&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ numberInput(start: int, end: int): int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ numberInput(start: int): int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ run(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ timePass(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ insertData(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ dataInit(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ gcForce(): void&lt;/p&gt;" vertex="1">
+          <mxGeometry height="215" width="290" x="40" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="DataPrinter" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;DataPrinter&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- DataPrinter()&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;u&gt;+ printData(data: Data[], name: String): void&lt;/u&gt;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="75" width="320" x="40" y="518" as="geometry" />
+        </mxCell>
+        <mxCell id="JVM" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;JVM&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- memoryTimePass: MemoryTimePass&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- memoryManager: MemoryManager&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- isTimerOn: boolean&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- passTimeIfNeeded(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ setTimerState(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ getTimerState(): boolean&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ garbageCollect(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ insertHeapData(d: Data): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ insertMetaData(d: Data): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ showData(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ nowData(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ shutDown(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ initData(): void&lt;/p&gt;" vertex="1">
+          <mxGeometry height="260" width="240" x="430" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="OOMEHandler" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;OOMEHandler&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;u&gt;- OOME_MSG: String&lt;/u&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;u&gt;+ execute&amp;lt;T&amp;gt;(v: ThrowingConsumer&amp;lt;T&amp;gt;, t: T, r: Runnable): void&lt;/u&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;u&gt;+ execute(v: ThrowingRunnable, r: Runnable): void&lt;/u&gt;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="100" width="430" x="430" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="ThrowingConsumer" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&amp;laquo;interface&amp;raquo;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-top:0px;text-align:center;&quot;&gt;&lt;b&gt;&lt;i&gt;ThrowingConsumer&amp;lt;T&amp;gt;&lt;/i&gt;&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ execute(t: T): void&lt;/p&gt;" vertex="1">
+          <mxGeometry height="75" width="180" x="430" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="ThrowingRunnable" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&amp;laquo;interface&amp;raquo;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-top:0px;text-align:center;&quot;&gt;&lt;b&gt;&lt;i&gt;ThrowingRunnable&lt;/i&gt;&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ execute(): void&lt;/p&gt;" vertex="1">
+          <mxGeometry height="75" width="160" x="650" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="MemoryManager" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;MemoryManager&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- heap: Data[]&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- meta: Data[]&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- minorGCS: MinorGC[]&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- majorGC: GC&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- fullGC: GC&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- topManager: TopManager&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;u&gt;- THREAD_POOL_SIZE: int = 2&lt;/u&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- executorService: ExecutorService&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- garbageCollect(gc: GC): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- multiThreadingMinorGC(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ garbageCollect(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ insertHeapData(d: Data): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ insertMetaData(d: Data): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ initData(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ showData(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ executorServiceShutdown(): void&lt;/p&gt;" vertex="1">
+          <mxGeometry height="310" width="250" x="1000" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="MemoryTimePass" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;MemoryTimePass&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- heap: Data[]&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- meta: Data[]&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- start: long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- remain: long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;u&gt;- msToSecond: long = 1000&lt;/u&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ timeStart(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ timePass(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- timePass(dataList: Data[], time: int): void&lt;/p&gt;" vertex="1">
+          <mxGeometry height="180" width="320" x="1000" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="TopManager" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;TopManager&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;u&gt;+ EDEN_END: int = 3&lt;/u&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;u&gt;+ SURVIVOR_1_END: int = 4&lt;/u&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;u&gt;+ SURVIVOR_2_END: int = 5&lt;/u&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;u&gt;+ OLD_END: int = 15&lt;/u&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;u&gt;+ META_END: int = 5&lt;/u&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;u&gt;+ RETRYABLE_FAILURE: int = -1&lt;/u&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;u&gt;+ DATA_TOO_LARGE: int = -2&lt;/u&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- edenTop: int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- survivorTop: AtomicInteger&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- oldTop: AtomicInteger&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- metaTop: int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- nextSurvivor: boolean&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ allocateEden(size: int): int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ allocateSurvivor(size: int): int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ allocateOld(size: int): int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ allocateMeta(size: int): int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ getEdenTop(): int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ setEdenTop(edenTop: int): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ getOldTop(): int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ setOldTop(oldTop: int): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ getMetaTop(): int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ setMetaTop(metaTop: int): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ getNextSurvivor(): boolean&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ setNextSurvivor(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ setNextSurvivorTop(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ initEdenTop(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ initSurvivorTop(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ initOldTop(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ initMetaTop(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ topInit(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ oldAreaCheck(): boolean&lt;/p&gt;" vertex="1">
+          <mxGeometry height="550" width="250" x="1380" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Data" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Data&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- name: String&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- liveTime: int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- size: int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- gcTime: int&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Data(name: String, liveTime: int, size: int)&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ decreaseLiveTime(time: int): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ surviveGC(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ isLive(): boolean&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ isPromotion(): boolean&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ getName(): String&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ getLiveTime(): int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ getSize(): int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ getGcTime(): int&lt;/p&gt;" vertex="1">
+          <mxGeometry height="260" width="330" x="1690" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GC" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&amp;laquo;abstract&amp;raquo;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-top:0px;text-align:center;&quot;&gt;&lt;b&gt;&lt;i&gt;GC&lt;/i&gt;&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;# heap: Data[]&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;# start: int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;# end: int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;# topManager: TopManager&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ execute(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;i&gt;# search(): void&lt;/i&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;i&gt;# cleaning(): void&lt;/i&gt;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="179" width="180" x="1035" y="825" as="geometry" />
+        </mxCell>
+        <mxCell id="Runnable" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&amp;laquo;interface&amp;raquo;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-top:0px;text-align:center;&quot;&gt;&lt;b&gt;&lt;i&gt;Runnable&lt;/i&gt;&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ run(): void&lt;/p&gt;" vertex="1">
+          <mxGeometry height="75" width="150" x="430" y="825" as="geometry" />
+        </mxCell>
+        <mxCell id="MinorGC" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;MinorGC&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ run(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;# search(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;# cleaning(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- copy(d: Data): boolean&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- promotion(d: Data): boolean&lt;/p&gt;" vertex="1">
+          <mxGeometry height="125" width="220" x="430" y="1114" as="geometry" />
+        </mxCell>
+        <mxCell id="MajorGC" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;MajorGC&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;# mark: boolean[]&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;# marker: Marker&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;# sweeper: Sweeper&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;# compactor: Compactor&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ execute(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;# search(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;# cleaning(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;# compacting(): void&lt;/p&gt;" vertex="1">
+          <mxGeometry height="180" width="170" x="995" y="1114" as="geometry" />
+        </mxCell>
+        <mxCell id="FullGC" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;FullGC&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- meta: Data[]&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- mark: boolean[]&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- metaMark: boolean[]&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- marker: Marker&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- sweeper: Sweeper&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- compactor: Compactor&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ execute(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;# search(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;# cleaning(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;# compacting(): void&lt;/p&gt;" vertex="1">
+          <mxGeometry height="215" width="170" x="1365" y="1114" as="geometry" />
+        </mxCell>
+        <mxCell id="Marker" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&amp;laquo;interface&amp;raquo;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-top:0px;text-align:center;&quot;&gt;&lt;b&gt;&lt;i&gt;Marker&lt;/i&gt;&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ marking(data: Data[], mark: boolean[], start: int, end: int): void&lt;/p&gt;" vertex="1">
+          <mxGeometry height="75" width="470" x="430" y="1499" as="geometry" />
+        </mxCell>
+        <mxCell id="Sweeper" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&amp;laquo;interface&amp;raquo;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-top:0px;text-align:center;&quot;&gt;&lt;b&gt;&lt;i&gt;Sweeper&lt;/i&gt;&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ sweeping(data: Data[], mark: boolean[], start: int, end: int): int&lt;/p&gt;" vertex="1">
+          <mxGeometry height="75" width="470" x="960" y="1499" as="geometry" />
+        </mxCell>
+        <mxCell id="Compactor" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&amp;laquo;interface&amp;raquo;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-top:0px;text-align:center;&quot;&gt;&lt;b&gt;&lt;i&gt;Compactor&lt;/i&gt;&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ compacting(data: Data[], start: int, end: int): int&lt;/p&gt;" vertex="1">
+          <mxGeometry height="75" width="370" x="1490" y="1499" as="geometry" />
+        </mxCell>
+        <mxCell id="ParallelMarker" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;ParallelMarker&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ marking(data: Data[], mark: boolean[], start: int, end: int): void&lt;/p&gt;" vertex="1">
+          <mxGeometry height="60" width="470" x="430" y="1654" as="geometry" />
+        </mxCell>
+        <mxCell id="ParallelSweeper" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;ParallelSweeper&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ sweeping(data: Data[], mark: boolean[], start: int, end: int): int&lt;/p&gt;" vertex="1">
+          <mxGeometry height="60" width="470" x="960" y="1654" as="geometry" />
+        </mxCell>
+        <mxCell id="ParallelCompactor" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;ParallelCompactor&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ compacting(data: Data[], start: int, end: int): int&lt;/p&gt;" vertex="1">
+          <mxGeometry height="60" width="370" x="1490" y="1654" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="Controller" style="endArrow=open;endFill=0;endSize=10;html=1;rounded=0;fontSize=11;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.186047;exitDx=0;exitDy=0;entryX=0;entryY=0.153846;entryDx=0;entryDy=0;" target="JVM" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="JVM" style="endArrow=open;endFill=0;endSize=10;html=1;rounded=0;fontSize=11;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.153846;exitDx=0;exitDy=0;entryX=0;entryY=0.222222;entryDx=0;entryDy=0;" target="MemoryTimePass" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="JVM" style="endArrow=open;endFill=0;endSize=10;html=1;rounded=0;fontSize=11;exitX=1;exitY=0.884615;exitDx=0;exitDy=0;entryX=0;entryY=0.0967742;entryDx=0;entryDy=0;" target="MemoryManager" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="930" y="290" />
+              <mxPoint x="930" y="330" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="JVM" style="endArrow=open;endFill=0;endSize=10;dashed=1;html=1;rounded=0;fontSize=11;edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.27907;entryY=0;entryDx=0;entryDy=0;" target="OOMEHandler" value="&amp;laquo;use&amp;raquo;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="OOMEHandler" style="endArrow=open;endFill=0;endSize=10;dashed=1;html=1;rounded=0;fontSize=11;edgeStyle=orthogonalEdgeStyle;exitX=0.209302;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="ThrowingConsumer" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="OOMEHandler" style="endArrow=open;endFill=0;endSize=10;dashed=1;html=1;rounded=0;fontSize=11;edgeStyle=orthogonalEdgeStyle;exitX=0.697674;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="ThrowingRunnable" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="MemoryManager" style="endArrow=open;endFill=0;endSize=10;dashed=1;html=1;rounded=0;fontSize=11;edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.822581;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="DataPrinter" value="&amp;laquo;use&amp;raquo;">
+          <mxGeometry relative="1" x="0.75" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="MemoryManager" style="endArrow=open;endFill=0;endSize=10;html=1;rounded=0;fontSize=11;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.129032;exitDx=0;exitDy=0;entryX=0;entryY=0.509091;entryDx=0;entryDy=0;" target="TopManager" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="MemoryTimePass" style="endArrow=open;endFill=0;endSize=10;html=1;rounded=0;fontSize=11;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.121212;entryY=0;entryDx=0;entryDy=0;" target="Data" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1160" y="44" />
+              <mxPoint x="1730" y="44" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="MemoryManager" style="endArrow=open;endFill=0;endSize=10;html=1;rounded=0;fontSize=11;exitX=0.92;exitY=1;exitDx=0;exitDy=0;entryX=0.3;entryY=1;entryDx=0;entryDy=0;" target="Data" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1230" y="622" />
+              <mxPoint x="1789" y="622" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="MemoryManager" style="endArrow=open;endFill=0;endSize=10;html=1;rounded=0;fontSize=11;edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="GC" value="majorGC, fullGC">
+          <mxGeometry relative="1" x="-0.3" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="MemoryManager" style="endArrow=open;endFill=0;endSize=10;html=1;rounded=0;fontSize=11;exitX=0;exitY=0.919355;exitDx=0;exitDy=0;entryX=1;entryY=0.24;entryDx=0;entryDy=0;" target="MinorGC" value="minorGCS [3]">
+          <mxGeometry relative="1" x="0.35" as="geometry">
+            <Array as="points">
+              <mxPoint x="930" y="585" />
+              <mxPoint x="930" y="1144" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e13" edge="1" parent="1" source="GC" style="endArrow=open;endFill=0;endSize=10;html=1;rounded=0;fontSize=11;exitX=1;exitY=0.223464;exitDx=0;exitDy=0;entryX=0.4;entryY=1;entryDx=0;entryDy=0;" target="TopManager" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1480" y="865" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e14" edge="1" parent="1" source="GC" style="endArrow=open;endFill=0;endSize=10;html=1;rounded=0;fontSize=11;exitX=1;exitY=0.446927;exitDx=0;exitDy=0;entryX=0.6;entryY=1;entryDx=0;entryDy=0;" target="Data" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1888" y="905" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e15" edge="1" parent="1" source="MinorGC" style="endArrow=block;endFill=0;endSize=14;html=1;rounded=0;fontSize=11;exitX=0.6;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="GC" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="562" y="1054" />
+              <mxPoint x="1125" y="1054" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e16" edge="1" parent="1" source="MajorGC" style="endArrow=block;endFill=0;endSize=14;html=1;rounded=0;fontSize=11;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="GC" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1080" y="1054" />
+              <mxPoint x="1125" y="1054" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e17" edge="1" parent="1" source="FullGC" style="endArrow=block;endFill=0;endSize=14;html=1;rounded=0;fontSize=11;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="GC" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1450" y="1054" />
+              <mxPoint x="1125" y="1054" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e18" edge="1" parent="1" source="MinorGC" style="endArrow=block;endFill=0;endSize=14;dashed=1;html=1;rounded=0;fontSize=11;edgeStyle=orthogonalEdgeStyle;exitX=0.340909;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="Runnable" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e19" edge="1" parent="1" source="MajorGC" style="endArrow=open;endFill=0;endSize=10;html=1;rounded=0;fontSize=11;exitX=0.247059;exitY=1;exitDx=0;exitDy=0;entryX=0.348936;entryY=0;entryDx=0;entryDy=0;" target="Marker" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1037" y="1359" />
+              <mxPoint x="594" y="1359" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e20" edge="1" parent="1" source="MajorGC" style="endArrow=open;endFill=0;endSize=10;html=1;rounded=0;fontSize=11;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" target="Sweeper" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e21" edge="1" parent="1" source="MajorGC" style="endArrow=open;endFill=0;endSize=10;html=1;rounded=0;fontSize=11;exitX=0.747059;exitY=1;exitDx=0;exitDy=0;entryX=0.348649;entryY=0;entryDx=0;entryDy=0;" target="Compactor" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1122" y="1403" />
+              <mxPoint x="1619" y="1403" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e22" edge="1" parent="1" source="FullGC" style="endArrow=open;endFill=0;endSize=10;html=1;rounded=0;fontSize=11;exitX=0.247059;exitY=1;exitDx=0;exitDy=0;entryX=0.648936;entryY=0;entryDx=0;entryDy=0;" target="Marker" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1407" y="1425" />
+              <mxPoint x="735" y="1425" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e23" edge="1" parent="1" source="FullGC" style="endArrow=open;endFill=0;endSize=10;html=1;rounded=0;fontSize=11;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.648936;entryY=0;entryDx=0;entryDy=0;" target="Sweeper" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1450" y="1447" />
+              <mxPoint x="1265" y="1447" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e24" edge="1" parent="1" source="FullGC" style="endArrow=open;endFill=0;endSize=10;html=1;rounded=0;fontSize=11;exitX=0.747059;exitY=1;exitDx=0;exitDy=0;entryX=0.648649;entryY=0;entryDx=0;entryDy=0;" target="Compactor" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1492" y="1469" />
+              <mxPoint x="1730" y="1469" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e25" edge="1" parent="1" source="ParallelMarker" style="endArrow=block;endFill=0;endSize=14;dashed=1;html=1;rounded=0;fontSize=11;edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="Marker" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e26" edge="1" parent="1" source="ParallelSweeper" style="endArrow=block;endFill=0;endSize=14;dashed=1;html=1;rounded=0;fontSize=11;edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="Sweeper" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e27" edge="1" parent="1" source="ParallelCompactor" style="endArrow=block;endFill=0;endSize=14;dashed=1;html=1;rounded=0;fontSize=11;edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="Compactor" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
